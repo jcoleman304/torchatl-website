@@ -92,6 +92,22 @@ const DEMO_MEMBERS = {
             { date: '2026-03-05', type: 'Recording', hours: 10 }
         ]
     },
+    'dke@torchatl.com': {
+        id: 'TM003',
+        email: 'dke@torchatl.com',
+        accessCode: 'DKE2026',
+        name: 'DKE',
+        tier: 'Ambassador',
+        founding: true,
+        joinDate: '2026-02-01',
+        phone: '',
+        company: '',
+        hoursUsed: 0,
+        hoursScheduled: 0,
+        sessions: [],
+        guests: [],
+        history: []
+    },
     'member@torch.com': {
         id: 'TM002',
         email: 'member@torch.com',

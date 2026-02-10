@@ -298,6 +298,7 @@ document.addEventListener('keydown', (e) => {
 // Member credentials (synced with Member Portal)
 const MEMBER_CREDENTIALS = {
     'joi@torchatl.com': { accessCode: 'JOI2026', name: 'Joi Coleman' },
+    'dke@torchatl.com': { accessCode: 'DKE2026', name: 'DKE' },
     'derrick@example.com': { accessCode: 'TORCH2026', name: 'Derrick Milano' },
     'member@torch.com': { accessCode: 'DEMO2026', name: 'Demo Member' }
 };
