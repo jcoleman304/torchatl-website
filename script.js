@@ -121,7 +121,7 @@ function initScrollEffects() {
 
     // Add fade-in class to elements
     const animateElements = document.querySelectorAll(
-        '.section-header, .about-tag, .about-headline, .about-divider, .about-copy, .about-signature, .estate-card, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
+        '.section-header, .about-content, .about-features, .estate-card, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
     );
 
     animateElements.forEach(el => {
@@ -145,11 +145,6 @@ function initScrollEffects() {
         .tier.fade-in {
             transition-delay: calc(var(--index, 0) * 0.1s);
         }
-        .about-tag.fade-in { transition-delay: 0s; }
-        .about-headline.fade-in { transition-delay: 0.2s; }
-        .about-divider.fade-in { transition-delay: 0.4s; }
-        .about-copy.fade-in { transition-delay: 0.6s; }
-        .about-signature.fade-in { transition-delay: 0.9s; }
     `;
     document.head.appendChild(style);
 
