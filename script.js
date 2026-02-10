@@ -121,7 +121,7 @@ function initScrollEffects() {
 
     // Add fade-in class to elements
     const animateElements = document.querySelectorAll(
-        '.section-header, .about-content, .about-features, .estate-card, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
+        '.section-header, .about-tag, .about-headline, .about-divider, .about-copy, .about-signature, .estate-card, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
     );
 
     animateElements.forEach(el => {
