@@ -145,6 +145,11 @@ function initScrollEffects() {
         .tier.fade-in {
             transition-delay: calc(var(--index, 0) * 0.1s);
         }
+        .about-tag.fade-in { transition-delay: 0s; }
+        .about-headline.fade-in { transition-delay: 0.2s; }
+        .about-divider.fade-in { transition-delay: 0.4s; }
+        .about-copy.fade-in { transition-delay: 0.6s; }
+        .about-signature.fade-in { transition-delay: 0.9s; }
     `;
     document.head.appendChild(style);
 
