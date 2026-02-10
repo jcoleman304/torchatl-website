@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollEffects();
     initInquiryForm();
     initPreloader();
+    initSuiteSlideshow();
 });
 
 // Preloader
@@ -463,12 +464,16 @@ function initSuiteSlideshow() {
     images[current].classList.add('active');
 
     setInterval(() => {
-        images[current].classList.remove('active');
+        const prev = current;
         current = (current + 1) % images.length;
+        images[prev].classList.remove('active');
+        images[prev].classList.add('fade-out');
+        images[current].classList.remove('fade-out');
         images[current].classList.add('active');
+        setTimeout(() => {
+            images[prev].classList.remove('fade-out');
+        }, 1500);
     }, 6000);
 }
-
-initSuiteSlideshow();
 
 console.log('[TORCH ATL] Website initialized');

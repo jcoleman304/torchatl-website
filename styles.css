@@ -604,6 +604,7 @@ h1, h2, h3, h4, h5, h6 {
 .suites-bg {
     position: absolute;
     inset: 0;
+    z-index: 0;
 }
 
 .suites-bg-img {
@@ -618,14 +619,24 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1);
 }
 
+.suites-bg-img:first-child {
+    opacity: 1;
+}
+
 .suites-bg-img.active {
     opacity: 1;
     transform: scale(1.05);
 }
 
+.suites-bg-img.fade-out {
+    opacity: 0;
+    transform: scale(1);
+}
+
 .suites-overlay {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(
         180deg,
         rgba(10, 10, 10, 0.55) 0%,
@@ -636,6 +647,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .suites-container {
     position: relative;
+    z-index: 2;
 }
 
 .suites-content {
