@@ -614,19 +614,13 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
     object-position: center;
     opacity: 0;
-    animation: suiteFade 12s ease-in-out infinite;
+    transition: opacity 1.5s ease-in-out, transform 6s ease-in-out;
+    transform: scale(1);
 }
 
-.suites-bg-img:nth-child(2) {
-    animation-delay: 6s;
-}
-
-@keyframes suiteFade {
-    0% { opacity: 0; }
-    8% { opacity: 1; }
-    42% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 0; }
+.suites-bg-img.active {
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .suites-overlay {

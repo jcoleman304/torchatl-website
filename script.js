@@ -454,4 +454,21 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
+// Suite background slideshow
+function initSuiteSlideshow() {
+    const images = document.querySelectorAll('.suites-bg-img');
+    if (images.length < 2) return;
+
+    let current = 0;
+    images[current].classList.add('active');
+
+    setInterval(() => {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+    }, 6000);
+}
+
+initSuiteSlideshow();
+
 console.log('[TORCH ATL] Website initialized');
