@@ -595,96 +595,119 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Guest Suites Section */
-.suites-section {
+.suites {
+    background: var(--dark);
+}
+
+.suites .section-subtitle {
+    color: var(--silver);
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.suites-gallery {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 16px;
+}
+
+.suite-card {
     position: relative;
-    padding: 140px 0;
     overflow: hidden;
+    cursor: pointer;
 }
 
-.suites-bg {
-    position: absolute;
-    inset: 0;
+.suite-card-primary {
+    height: 480px;
 }
 
-.suites-bg-img {
+.suite-card-secondary {
+    height: 480px;
+}
+
+.suite-card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    transition: transform 0.8s ease;
 }
 
-.suites-overlay {
+.suite-card:hover .suite-card-img {
+    transform: scale(1.05);
+}
+
+.suite-card-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 10, 0.82);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: linear-gradient(180deg, transparent 40%, rgba(10, 10, 10, 0.85) 100%);
+    transition: var(--transition);
 }
 
-.suites-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
+.suite-card:hover .suite-card-overlay {
+    background: linear-gradient(180deg, transparent 30%, rgba(10, 10, 10, 0.9) 100%);
 }
 
-.suites-content .section-title {
-    color: var(--white);
-}
-
-.suites-content p {
-    color: var(--silver);
-    margin-bottom: 1.5rem;
-    line-height: 1.8;
-}
-
-.suites-amenities {
-    position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.12);
+.suite-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 40px;
 }
 
-.suites-amenities-title {
-    font-family: var(--font-display);
-    font-size: 1.125rem;
+.suite-card-content h3 {
+    font-size: 1.75rem;
     font-weight: 500;
     color: var(--white);
-    margin-bottom: 28px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    margin-bottom: 8px;
 }
 
-.suites-amenities-grid {
+.suite-card-content p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+.suites-features {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.suite-amenity {
+.suite-feature {
     display: flex;
     align-items: center;
-    gap: 16px;
-    color: var(--cream);
+    gap: 12px;
+    color: var(--silver);
+    transition: var(--transition);
 }
 
-.suite-amenity svg {
+.suite-feature:hover {
     color: var(--gold);
+}
+
+.suite-feature svg {
     flex-shrink: 0;
 }
 
-.suite-amenity span {
-    font-size: 0.9375rem;
-    letter-spacing: 0.02em;
+.suite-feature span {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
 }
 
 .suites-note {
-    margin-top: 28px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    text-align: center;
+    margin-top: 32px;
+}
+
+.suites-note p {
     font-size: 0.8125rem;
-    color: var(--gold) !important;
+    color: var(--gold);
     font-style: italic;
     letter-spacing: 0.02em;
 }
@@ -1168,10 +1191,23 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive */
 @media (max-width: 1024px) {
     .about-grid,
-    .inquire-grid,
-    .suites-grid {
+    .inquire-grid {
         grid-template-columns: 1fr;
         gap: 48px;
+    }
+
+    .suites-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .suite-card-primary,
+    .suite-card-secondary {
+        height: 380px;
+    }
+
+    .suites-features {
+        flex-wrap: wrap;
+        gap: 32px;
     }
 
     .estate-gallery {
@@ -1249,17 +1285,25 @@ h1, h2, h3, h4, h5, h6 {
         height: 260px;
     }
 
-    .estate-card-content {
+    .estate-card-content,
+    .suite-card-content {
         padding: 24px;
     }
 
-    .estate-card-content h3 {
+    .estate-card-content h3,
+    .suite-card-content h3 {
         font-size: 1.375rem;
     }
 
-    .estate-features {
+    .estate-features,
+    .suites-features {
         gap: 24px;
         justify-content: flex-start;
+    }
+
+    .suite-card-primary,
+    .suite-card-secondary {
+        height: 300px;
     }
 
     .membership-tiers {
@@ -1308,6 +1352,11 @@ h1, h2, h3, h4, h5, h6 {
 
     .estate-card-medium {
         height: 220px;
+    }
+
+    .suite-card-primary,
+    .suite-card-secondary {
+        height: 260px;
     }
 }
 
