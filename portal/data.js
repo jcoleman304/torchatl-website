@@ -58,7 +58,7 @@ const DEMO_MEMBERS = {
         tier: 'Ambassador',
         founding: true,
         joinDate: '2026-03-15',
-        phone: '(404) 555-0100',
+        phone: '',
         company: 'Torch Music Corporation',
         hoursUsed: 0,
         hoursScheduled: 0,
