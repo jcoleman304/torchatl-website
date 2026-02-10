@@ -254,20 +254,20 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.875rem;
     font-weight: 400;
     letter-spacing: 0.05em;
-    color: var(--silver);
-    transition: var(--transition);
+    color: #F4F1EB;
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: var(--white);
+    color: #C9A84C;
 }
 
 .nav-cta {
-    color: var(--gold) !important;
+    color: #F4F1EB !important;
 }
 
 .nav-cta:hover {
-    color: var(--gold-light) !important;
+    color: #C9A84C !important;
 }
 
 .nav-toggle {
@@ -1355,16 +1355,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Member Login Modal */
 .nav-login {
-    border: 1px solid rgba(212, 175, 55, 0.5);
+    border: 1px solid rgba(244, 241, 235, 0.4);
     padding: 8px 16px !important;
     margin-left: 8px;
-    transition: var(--transition);
+    color: #F4F1EB !important;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
 .nav-login:hover {
-    background: var(--gold);
-    color: var(--black) !important;
-    border-color: var(--gold);
+    color: #C9A84C !important;
+    border-color: #C9A84C;
+    background: transparent;
 }
 
 .login-modal-content {
