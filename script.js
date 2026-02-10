@@ -381,7 +381,7 @@ function handleMemberLogin(event) {
     console.log('[TORCH] Login successful:', member.name);
 
     // Redirect to member portal
-    window.location.href = '/portal/index.html';
+    window.location.href = 'portal/index.html';
 }
 
 // Close login modal on outside click
