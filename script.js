@@ -215,14 +215,13 @@ function initInquiryForm() {
 
 // Handle inquiry form submission
 function handleInquiry(event) {
-    event.preventDefault();
-
     const form = event.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     // Validate required fields
     if (!data.name || !data.email || !data.role) {
+        event.preventDefault();
         showNotification('Please fill in all required fields.', 'error');
         return;
     }
@@ -230,21 +229,19 @@ function handleInquiry(event) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
+        event.preventDefault();
         showNotification('Please enter a valid email address.', 'error');
         return;
     }
 
-    // Store inquiry (in production, this would send to backend)
+    // Store inquiry locally as backup
     storeInquiry(data);
 
-    // Show success modal
-    showSuccessModal();
-
-    // Reset form
-    form.reset();
+    console.log('[TORCH] Inquiry submitted to membership@torchatl.com');
+    // Form submits natively to FormSubmit.co
 }
 
-// Store inquiry locally (demo purposes)
+// Store inquiry locally as backup
 function storeInquiry(data) {
     const inquiries = JSON.parse(localStorage.getItem('torch_inquiries') || '[]');
 
@@ -256,7 +253,7 @@ function storeInquiry(data) {
 
     localStorage.setItem('torch_inquiries', JSON.stringify(inquiries));
 
-    console.log('[TORCH] Inquiry stored:', data);
+    console.log('[TORCH] Inquiry stored locally:', data);
 }
 
 // Show success modal
