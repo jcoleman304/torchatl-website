@@ -490,131 +490,79 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Estate Section */
 .estate {
+    background: var(--dark);
+}
+
+.estate .section-subtitle {
+    color: var(--silver);
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.estate-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+}
+
+.estate-card {
     position: relative;
-    min-height: 100vh;
     overflow: hidden;
-    display: flex;
-    align-items: flex-end;
+    cursor: pointer;
 }
 
-.estate-slideshow {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+.estate-card-large {
+    grid-column: 1 / -1;
+    height: 480px;
 }
 
-.estate-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+.estate-card-medium {
+    height: 360px;
 }
 
-.estate-slide:first-child {
-    opacity: 1;
-}
-
-.estate-slide.active {
-    opacity: 1;
-}
-
-.estate-slide.fade-out {
-    opacity: 0;
-}
-
-.estate-slide-img {
+.estate-card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: transform 6s ease-in-out;
+    transition: transform 0.8s ease;
 }
 
-.estate-slide.active .estate-slide-img {
+.estate-card:hover .estate-card-img {
     transform: scale(1.05);
 }
 
-.estate-overlay {
+.estate-card-overlay {
     position: absolute;
     inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-        180deg,
-        rgba(10, 10, 10, 0.3) 0%,
-        rgba(10, 10, 10, 0.5) 50%,
-        rgba(10, 10, 10, 0.85) 100%
-    );
-}
-
-.estate-container {
-    position: relative;
-    z-index: 2;
-    padding-bottom: 80px;
-    padding-top: 160px;
-}
-
-.estate-slide-content {
-    max-width: 640px;
-    margin-bottom: 48px;
-}
-
-.estate-slide-content .section-label {
-    color: var(--gold);
-}
-
-.estate-slide-content .section-title {
-    color: var(--white);
-    margin-bottom: 32px;
-}
-
-.estate-slide-title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: var(--gold);
-    margin-bottom: 12px;
-    transition: opacity 0.5s ease;
-}
-
-.estate-slide-desc {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.7;
-    transition: opacity 0.5s ease;
-}
-
-.estate-slide-nav {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 48px;
-}
-
-.estate-nav-btn {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--white);
-    cursor: pointer;
+    background: linear-gradient(180deg, transparent 30%, rgba(10, 10, 10, 0.85) 100%);
     transition: var(--transition);
 }
 
-.estate-nav-btn:hover {
-    background: rgba(212, 175, 55, 0.15);
-    border-color: var(--gold);
-    color: var(--gold);
+.estate-card:hover .estate-card-overlay {
+    background: linear-gradient(180deg, transparent 20%, rgba(10, 10, 10, 0.9) 100%);
 }
 
-.estate-slide-counter {
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.6);
+.estate-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+}
+
+.estate-card-content h3 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.estate-card-content p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 480px;
 }
 
 .estate-features {
@@ -1259,9 +1207,16 @@ h1, h2, h3, h4, h5, h6 {
         padding: 120px 0;
     }
 
-    .estate-container {
-        padding-top: 120px;
-        padding-bottom: 60px;
+    .estate-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .estate-card-large {
+        height: 400px;
+    }
+
+    .estate-card-medium {
+        height: 300px;
     }
 
     .estate-features {
@@ -1319,9 +1274,20 @@ h1, h2, h3, h4, h5, h6 {
         padding: 80px 0;
     }
 
-    .estate-container {
-        padding-top: 100px;
-        padding-bottom: 48px;
+    .estate-card-large {
+        height: 320px;
+    }
+
+    .estate-card-medium {
+        height: 260px;
+    }
+
+    .estate-card-content {
+        padding: 24px;
+    }
+
+    .estate-card-content h3 {
+        font-size: 1.375rem;
     }
 
     .estate-features {
@@ -1377,6 +1343,13 @@ h1, h2, h3, h4, h5, h6 {
         padding: 14px 24px;
     }
 
+    .estate-card-large {
+        height: 260px;
+    }
+
+    .estate-card-medium {
+        height: 220px;
+    }
 
 }
 

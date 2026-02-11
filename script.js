@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initInquiryForm();
     initPreloader();
     initSuiteSlideshow();
-    initEstateSlideshow();
 });
 
 // Preloader
@@ -122,7 +121,7 @@ function initScrollEffects() {
 
     // Add fade-in class to elements
     const animateElements = document.querySelectorAll(
-        '.section-header, .about-content, .about-features, .estate-slide-content, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
+        '.section-header, .about-content, .about-features, .estate-card, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
     );
 
     animateElements.forEach(el => {
@@ -475,77 +474,6 @@ function initSuiteSlideshow() {
             images[prev].classList.remove('fade-out');
         }, 1500);
     }, 6000);
-}
-
-// Estate slideshow
-function initEstateSlideshow() {
-    const slides = document.querySelectorAll('.estate-slide');
-    const titleEl = document.querySelector('.estate-slide-title');
-    const descEl = document.querySelector('.estate-slide-desc');
-    const counterEl = document.querySelector('.estate-slide-counter');
-    const prevBtn = document.querySelector('.estate-prev');
-    const nextBtn = document.querySelector('.estate-next');
-
-    if (slides.length < 2 || !titleEl) return;
-
-    let current = 0;
-    let autoplay;
-    const total = slides.length;
-
-    function updateText() {
-        const slide = slides[current];
-        titleEl.style.opacity = '0';
-        descEl.style.opacity = '0';
-        setTimeout(() => {
-            titleEl.textContent = slide.dataset.title;
-            descEl.textContent = slide.dataset.desc;
-            counterEl.textContent = (current + 1) + ' / ' + total;
-            titleEl.style.opacity = '1';
-            descEl.style.opacity = '1';
-        }, 300);
-    }
-
-    function goTo(index) {
-        const prev = current;
-        current = (index + total) % total;
-        slides[prev].classList.remove('active');
-        slides[prev].classList.add('fade-out');
-        slides[current].classList.remove('fade-out');
-        slides[current].classList.add('active');
-        setTimeout(() => {
-            slides[prev].classList.remove('fade-out');
-        }, 1500);
-        updateText();
-    }
-
-    // Initialize first slide
-    slides[current].classList.add('active');
-    titleEl.textContent = slides[0].dataset.title;
-    descEl.textContent = slides[0].dataset.desc;
-    counterEl.textContent = '1 / ' + total;
-
-    // Auto-advance
-    function startAutoplay() {
-        autoplay = setInterval(() => goTo(current + 1), 5000);
-    }
-
-    function resetAutoplay() {
-        clearInterval(autoplay);
-        startAutoplay();
-    }
-
-    startAutoplay();
-
-    // Navigation buttons
-    prevBtn.addEventListener('click', () => {
-        goTo(current - 1);
-        resetAutoplay();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        goTo(current + 1);
-        resetAutoplay();
-    });
 }
 
 console.log('[TORCH ATL] Website initialized');
