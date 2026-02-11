@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initInquiryForm();
     initPreloader();
     initSuiteSlideshow();
+    initEstateSlideshow();
 });
 
 // Preloader
@@ -121,7 +122,7 @@ function initScrollEffects() {
 
     // Add fade-in class to elements
     const animateElements = document.querySelectorAll(
-        '.section-header, .about-content, .about-features, .estate-card, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
+        '.section-header, .about-content, .about-features, .estate-content, .suites-content, .suites-features, .tier, .inquire-content, .inquire-form-container, .quote'
     );
 
     animateElements.forEach(el => {
@@ -474,6 +475,81 @@ function initSuiteSlideshow() {
             images[prev].classList.remove('fade-out');
         }, 1500);
     }, 6000);
+}
+
+// Estate background slideshow
+function initEstateSlideshow() {
+    var images = document.querySelectorAll('.estate-bg-img');
+    var labelEl = document.querySelector('.estate-room-label');
+    var counterEl = document.querySelector('.estate-counter');
+    var prevBtn = document.querySelector('.estate-prev');
+    var nextBtn = document.querySelector('.estate-next');
+
+    if (!images.length || !labelEl) return;
+
+    var current = 0;
+    var total = images.length;
+    var autoTimer;
+
+    // Show first slide
+    images[0].classList.add('active');
+    labelEl.textContent = images[0].getAttribute('data-label');
+    counterEl.textContent = '1 / ' + total;
+
+    function goTo(index) {
+        var prev = current;
+        current = ((index % total) + total) % total;
+
+        // Fade out old
+        images[prev].classList.remove('active');
+        images[prev].classList.add('fade-out');
+
+        // Fade in new
+        images[current].classList.remove('fade-out');
+        images[current].classList.add('active');
+
+        // Clean up old after transition
+        setTimeout(function() {
+            images[prev].classList.remove('fade-out');
+        }, 1500);
+
+        // Update label with fade
+        labelEl.style.opacity = '0';
+        setTimeout(function() {
+            labelEl.textContent = images[current].getAttribute('data-label');
+            counterEl.textContent = (current + 1) + ' / ' + total;
+            labelEl.style.opacity = '1';
+        }, 300);
+    }
+
+    // Auto-advance every 5 seconds
+    function startAuto() {
+        autoTimer = setInterval(function() {
+            goTo(current + 1);
+        }, 5000);
+    }
+
+    function resetAuto() {
+        clearInterval(autoTimer);
+        startAuto();
+    }
+
+    startAuto();
+
+    // Prev / Next buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            goTo(current - 1);
+            resetAuto();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            goTo(current + 1);
+            resetAuto();
+        });
+    }
 }
 
 console.log('[TORCH ATL] Website initialized');
