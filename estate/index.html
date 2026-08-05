@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TORCH ATL — Facility Dossier</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="TORCH ATL private facility dossier — specifications, rooms, rates, and logistics.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A0A' width='100' height='100' rx='12'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23D4AF37' font-family='Georgia'>T</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0A0A0A;--ink:#111111;--cream:#F5F5F0;--gold:#D4AF37;--muted:#9a988f;--line:rgba(245,245,240,.14);--goldline:rgba(212,175,55,.35)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;font-size:15.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:22px;overflow-x:auto;white-space:nowrap}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1rem;letter-spacing:.14em;color:var(--cream);flex-shrink:0}
+.nav-logo span{color:var(--gold)}
+.nav a.anchor{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.nav a.anchor:hover{color:var(--gold);text-decoration:none}
+/* hero */
+.hero{position:relative;min-height:62vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero-body{position:relative;max-width:960px;margin:0 auto;padding:120px 24px 56px;width:100%}
+.kicker{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(1.7rem,4.2vw,2.7rem);line-height:1.22;max-width:820px}
+.hero-sub{margin-top:16px;color:var(--muted);font-size:.85rem;max-width:640px}
+/* sections */
+section{padding:64px 0;border-top:1px solid var(--line)}
+h2{font-family:'Playfair Display',serif;font-weight:500;font-size:1.55rem;margin-bottom:6px}
+.sec-note{color:var(--muted);font-size:.85rem;margin-bottom:30px}
+h3{font-family:'Playfair Display',serif;font-weight:500;font-size:1.12rem;margin-bottom:10px}
+p{max-width:720px}
+p+p{margin-top:12px}
+/* glance grid */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));border:1px solid var(--line)}
+.g-cell{padding:20px 22px;border:1px solid var(--line)}
+.g-num{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);display:block;line-height:1.2}
+.g-label{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.drive{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:26px}
+.drive div{font-size:.85rem}
+.drive b{display:block;font-weight:500;color:var(--gold);font-size:.95rem}
+.drive span{color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+/* rooms */
+.room{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;margin-top:36px}
+.room img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.chain{border:1px solid var(--goldline);padding:14px 16px;margin:14px 0 18px;font-size:.86rem}
+.chain b{color:var(--gold);font-weight:500}
+.chain i{color:var(--muted);font-style:normal;padding:0 6px}
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+th{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:10px 12px;border-bottom:1px solid var(--goldline)}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:500;color:var(--cream)}
+.tblwrap{overflow-x:auto}
+.fine{font-size:.8rem;color:var(--muted);margin-top:14px;max-width:720px}
+/* dl spec list */
+dl.spec{display:grid;grid-template-columns:190px 1fr;gap:0}
+dl.spec dt{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:13px 0;border-top:1px solid var(--line);font-weight:500}
+dl.spec dd{padding:12px 0 12px 18px;border-top:1px solid var(--line);font-size:.9rem}
+ul.plain{list-style:none}
+ul.plain li{padding:4px 0 4px 16px;position:relative;font-size:.9rem}
+ul.plain li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+/* modes */
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.mode{background:var(--black);padding:24px 22px}
+.mode h3{font-size:1rem}
+.mode .tag{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.mode p{font-size:.85rem;color:#c9c7be}
+/* operator */
+.op{display:grid;grid-template-columns:1fr;gap:8px;max-width:720px}
+/* booking */
+.book-grid{display:flex;flex-wrap:wrap;gap:14px 44px;margin-top:20px;font-size:.95rem}
+.btn{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:12px 26px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-top:26px}
+.btn:hover{background:var(--gold);color:var(--black);text-decoration:none}
+footer{border-top:1px solid var(--line);padding:34px 0 44px;font-size:.75rem;color:var(--muted)}
+footer .tag{margin-top:6px}
+@media(max-width:720px){.room{grid-template-columns:1fr}dl.spec{grid-template-columns:1fr}dl.spec dd{border-top:none;padding:0 0 12px}}
+@media print{.nav{display:none}body{background:#fff;color:#111}}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-in">
+<a class="nav-logo" href="#top">TORCH <span>ATL</span></a>
+<a class="anchor" href="#glance">At a Glance</a>
+<a class="anchor" href="#walkthrough">Walkthrough</a>
+<a class="anchor" href="#rooms">Rooms</a>
+<a class="anchor" href="#house">The House</a>
+<a class="anchor" href="#modes">Modes of Use</a>
+<a class="anchor" href="#rates">Rates &amp; Terms</a>
+<a class="anchor" href="#logistics">Logistics</a>
+<a class="anchor" href="#operator">Operator</a>
+<a class="anchor" href="#booking">Booking</a>
+<a class="anchor" href="TORCH_ATL_Spec_Sheet.pdf" download>PDF ↓</a>
+</div></nav>
+
+<header class="hero" id="top">
+<img src="../images/hero-exterior.jpg" alt="TORCH ATL estate exterior">
+<div class="hero-body">
+<p class="kicker">Facility Dossier · Lithonia, Georgia</p>
+<h1>TORCH ATL is a gated private residential estate operating two commercial recording rooms, with on-site lodging across three king suites.</h1>
+<p class="hero-sub">This page is shared by invitation and is not linked from torchatl.com. A one-page PDF spec sheet is available <a href="TORCH_ATL_Spec_Sheet.pdf" download>here</a> for forwarding.</p>
+</div>
+</header>
+
+<section id="glance"><div class="wrap">
+<h2>The Estate at a Glance</h2>
+<p class="sec-note">Full specifications follow. Exact address is released on confirmed booking.</p>
+<div class="glance">
+<div class="g-cell"><span class="g-num">5,021</span><span class="g-label">Square feet, gated</span></div>
+<div class="g-cell"><span class="g-num">2</span><span class="g-label">Recording rooms — run simultaneously</span></div>
+<div class="g-cell"><span class="g-num">3</span><span class="g-label">King suites — sleeps 6 in beds</span></div>
+<div class="g-cell"><span class="g-num">6</span><span class="g-label">Bathrooms — one per studio &amp; suite</span></div>
+</div>
+<div class="drive">
+<div><b>~25 min</b><span>Hartsfield-Jackson</span></div>
+<div><b>~20 min</b><span>Downtown Atlanta</span></div>
+<div><b>~25 min</b><span>Midtown</span></div>
+<div><b>~35 min</b><span>Buckhead</span></div>
+</div>
+<p style="margin-top:26px">The estate sits east of the city in Lithonia — twenty-five minutes from the airport, far enough out that no one finds you. There is no commercial building, no shared hallway, and no other client on the property. Every booking has the grounds to itself.</p>
+</div></section>
+
+<section id="walkthrough"><div class="wrap">
+<h2>The Walkthrough</h2>
+<p class="sec-note">The full estate, unedited path — gate to studios to suites to grounds. 7 minutes.</p>
+<video controls preload="metadata" playsinline poster="walkthrough-poster.jpg" style="width:100%;display:block;border:1px solid var(--line);background:#000">
+<source src="walkthrough.mp4" type="video/mp4">
+</video>
+</div></section>
+
+<section id="rooms"><div class="wrap">
+<h2>Rooms</h2>
+<p class="sec-note">Pro Tools, Apollo conversion, and Yamaha HS8 monitoring in both rooms. Full inventory on the <a href="../gear.html">gear rider</a>.</p>
+
+<div class="room">
+<img src="../images/b-room.jpg" alt="B Room">
+<div>
+<h3>B Room</h3>
+<div class="chain"><b>Neumann U87</b><i>→</i><b>Neve 1073 SPX</b><i>→</i><b>Tube-Tech CL1B</b><i>→</i><b>UAD Apollo X6</b></div>
+<ul class="plain">
+<li>Pro Tools · Yamaha HS8 monitoring · PreSonus headphone distribution · Furman power</li>
+<li>5 people included · 7 maximum · private bathroom in-room</li>
+<li>Primary tracking room — lead vocals, main sessions</li>
+</ul>
+</div>
+</div>
+
+<div class="room">
+<img src="../images/c-room.jpg" alt="C Room">
+<div>
+<h3>C Room</h3>
+<div class="chain"><b>Neumann TLM 103</b><i>→</i><b>UA LA-610 MkII</b><i>→</i><b>UAD Apollo X8</b></div>
+<ul class="plain">
+<li>Pro Tools · Yamaha HS8 monitoring · PreSonus headphone distribution · Furman power</li>
+<li>5 people included · 7 maximum · private bathroom in-room</li>
+<li>Second room for camps, writing rooms, and podcast/broadcast — Shure SM7B and MV7X (×2) on hand</li>
+</ul>
+</div>
+</div>
+
+<dl class="spec" style="margin-top:40px">
+<dt>Mic locker</dt><dd>Neumann U87 · Neumann TLM 103 (×2) · Shure SM7B · Shure MV7X (×2)</dd>
+<dt>Conversion</dt><dd>UAD Apollo X8 · Apollo X6 · Apollo Twin</dd>
+<dt>Software</dt><dd>Pro Tools · Waves Complete · UAD plugins · Auto-Tune (Antares) · VocAlign (Synchro Arts)</dd>
+<dt>Engineering</dt><dd>Rooms are bring-your-own-engineer by default. A Torch engineer is available at $35/hr.</dd>
+</dl>
+</div></section>
+
+<section id="house"><div class="wrap">
+<h2>The House</h2>
+<p class="sec-note">Where a team actually lives for five days. All three suites are included with full-estate and camp bookings.</p>
+<dl class="spec">
+<dt>Sleeping</dt><dd>Three king suites — sleeps six in beds. Parties beyond six are configured at booking. Teams stay on property: no hotel runs, no commute, no lost momentum.</dd>
+<dt>Presidential Suite</dt><dd>California King · rain shower and jacuzzi tub · sitting area with study desk · snack bar · private balcony (smoking permitted) · blackout curtains</dd>
+<dt>Guest suites</dt><dd>Two additional king suites — premium bedding, climate control, private bathrooms, 55"+ smart TVs, secure storage, 24-hour access on secured grounds</dd>
+<dt>Common areas</dt><dd>Creative Lounge (PS5) · Executive Lounge · Conference Room · podcast-ready booth · photoshoot wall</dd>
+<dt>Kitchen</dt><dd>Chef's kitchen with full refrigerator, dishwasher, air fryer, coffee and tea station. Full use included on estate bookings. A private chef and catering are arranged in advance, from $300/day.</dd>
+<dt>Outdoor</dt><dd>Deck with lounge and dining seating · grill · designated smoking area · grounds inside the gate</dd>
+<dt>Staffing</dt><dd>On-site security is included on full-day and overnight bookings. Rooms are reset and gear-verified before each session; linens are changed between every booking. A Torch contact is reachable for the duration of every stay, and overtime or changes route through management.</dd>
+</dl>
+</div></section>
+
+<section id="modes"><div class="wrap">
+<h2>Modes of Use</h2>
+<p class="sec-note">Four ways the estate runs. Every booking is exclusive — there is never another client on property.</p>
+<div class="modes">
+<div class="mode"><span class="tag">Session</span><h3>Single Session</h3><p>Half-day (7 hours, from 12 PM) or full-day (12 hours). One room or both. No overnight accommodations.</p></div>
+<div class="mode"><span class="tag">Buyout</span><h3>Full-Estate Lockout</h3><p>Overnight buyout of the property. Both rooms running, all three suites, security included. Priced per day with multi-day tiering.</p></div>
+<div class="mode"><span class="tag">3–7+ Days</span><h3>Camp / Retreat</h3><p>Multi-day lockout for label, writer, and publisher camps. The roster lives, works, and records on property. Chef available. One invoice.</p></div>
+<div class="mode"><span class="tag">Event</span><h3>Private Event</h3><p>Listening parties, album playbacks, A&amp;R showcases, private dinners. Gated and invite-only. Custom-quoted by scope.</p></div>
+</div>
+</div></section>
+
+<section id="rates"><div class="wrap">
+<h2>Rates &amp; Terms</h2>
+<p class="sec-note">All bookings are by inquiry — no hourly sessions, no walk-ins. Quotes are confirmed per booking.</p>
+<div class="tblwrap"><table>
+<tr><th>Mode</th><th>Rate</th><th>Includes</th></tr>
+<tr><td>Half-Day Session <span style="color:var(--muted);font-weight:300">(7 hrs)</span></td><td>B Room $650 · C Room $550 · Both $1,100</td><td>Studio access from 12 PM. Security available at $25/hr. No overnight.</td></tr>
+<tr><td>Full-Day Session <span style="color:var(--muted);font-weight:300">(12 hrs)</span></td><td>B Room $1,000 · C Room $850 · Both $1,350</td><td>Security included. No overnight.</td></tr>
+<tr><td>Full-Estate Lockout</td><td>$1,500/day (days 1–3) · $1,350/day (day 4+) · $1,200/day (28+ days)</td><td>Both rooms, all three suites, lounges, kitchen, grounds, security.</td></tr>
+<tr><td>Camp / Retreat</td><td>Lockout tiering — e.g. 5 days = $7,200</td><td>Everything above, multi-day. Chef and catering available.</td></tr>
+<tr><td>Private Event</td><td>From $1,200, custom-quoted</td><td>Estate, lounges, deck. Catering coordinated.</td></tr>
+</table></div>
+<dl class="spec" style="margin-top:36px">
+<dt>Add-ons</dt><dd>Torch engineer $35/hr · private chef / catering from $300/day · security (half-days) $25/hr · photoshoot with house photographer by arrangement</dd>
+<dt>Deposit</dt><dd>50% deposit confirms dates; balance due on arrival. Estate agreement signed via DocuSign.</dd>
+<dt>Cancellation</dt><dd>Overnight bookings: full deposit refund 14+ days out · 50% at 7–13 days · none under 7 days. Full-day: full refund 48+ hours out. Half-day: full refund 24+ hours out. Cancellations in writing to bookings@torchatl.com; date changes accommodated by availability.</dd>
+<dt>Liability</dt><dd>Damage, missing items, or excessive mess is billed to the booking client.</dd>
+</dl>
+</div></section>
+
+<section id="logistics"><div class="wrap">
+<h2>Logistics &amp; Policies</h2>
+<p class="sec-note">The advance block. What a tour manager or label coordinator needs before anyone gets in a vehicle.</p>
+<dl class="spec">
+<dt>Access</dt><dd>Gated single-entry drive. Exact address released on confirmed booking. 24-hour access on secured grounds for the duration of the stay. Check-in 3:00 PM · check-out 11:00 AM, extensions by availability. Overtime is approved through management before the scheduled end time.</dd>
+<dt>Occupancy</dt><dd>Each studio: 5 people included, 7 maximum. All guests enter with the primary client. Event capacity is quoted per event.</dd>
+<dt>Parking</dt><dd>Gated on-site parking within the estate. Oversized vehicles (Sprinter, trailer) confirmed at advance.</dd>
+<dt>Connectivity</dt><dd>Wi-Fi throughout the estate.</dd>
+<dt>Privacy</dt><dd>An NDA is standard on every booking. No public listing of guests or sessions. Tinted privacy windows — see out, no one sees in.</dd>
+<dt>Cameras</dt><dd>Security cameras cover exterior, entry points, hallways, and common lounges only. No cameras in studio rooms, guest suites, or bathrooms.</dd>
+<dt>Content</dt><dd>Photo and video capture is permitted across interiors and grounds; clients own what they shoot. Photoshoot wall on-site; house photographer available.</dd>
+<dt>Smoking</dt><dd>Permitted only inside the booked studio with the door closed, on the deck's designated area, and on the Presidential balcony. Violations elsewhere carry a remediation fee starting at $300.</dd>
+<dt>Noise</dt><dd>Outdoor levels are kept down late night. Studio sessions run around the clock.</dd>
+</dl>
+</div></section>
+
+<section id="operator"><div class="wrap">
+<h2>Operator</h2>
+<div class="op">
+<p>Torch ATL is owned and operated by <strong>Joi Coleman</strong> — nine years at Atlantic Records, founder and CEO of Torch Music Corporation, and an active A&amp;R with current major-label projects. She reviews every booking request personally.</p>
+</div>
+</div></section>
+
+<section id="booking"><div class="wrap">
+<h2>Availability &amp; Booking</h2>
+<p>Send dates and scope by email or the request form. Every request is answered within 24 hours with next steps and a tailored quote. Confirm the quote, place the 50% deposit, sign the estate agreement via DocuSign — dates locked.</p>
+<div class="book-grid">
+<div><a href="mailto:bookings@torchatl.com">bookings@torchatl.com</a></div>
+<div><a href="tel:+14048009507">(404) 800-9507</a></div>
+<div><a href="https://torchatl.com/#inquire">Request form →</a></div>
+</div>
+<a class="btn" href="TORCH_ATL_Spec_Sheet.pdf" download>Download the One-Page Spec Sheet (PDF)</a>
+</div></section>
+
+<footer><div class="wrap">
+<p>© 2026 Torch Music Corporation · Lithonia, Georgia · Where Comfort Ignites Creativity</p>
+<p class="tag">This dossier is shared by invitation. Specifications current as of August 2026; inventory subject to periodic audit.</p>
+</div></footer>
+
+</body>
+</html>
