@@ -103,9 +103,15 @@ footer .tag{margin-top:6px}
 </div></nav>
 
 <header class="hero" id="top">
-<video autoplay muted loop playsinline poster="../videos/posters/reception.jpg" aria-label="Arriving at the TORCH ATL reception">
-<source src="../videos/reception.mp4" type="video/mp4">
+<video id="hero-video" autoplay muted playsinline poster="../videos/posters/trailer.jpg" aria-label="TORCH ATL trailer and reception arrival">
+<source src="../videos/trailer.mp4" type="video/mp4">
 </video>
+<script>
+(function(){
+var v=document.getElementById('hero-video'),clips=['../videos/trailer.mp4','../videos/reception.mp4'],i=0;
+v.addEventListener('ended',function(){i=(i+1)%clips.length;v.src=clips[i];v.play();});
+})();
+</script>
 <div class="hero-body">
 <p class="kicker">Facility Dossier · Lithonia, Georgia</p>
 <h1>TORCH ATL is a gated private residential estate operating two commercial recording rooms, with on-site lodging across three king suites.</h1>
