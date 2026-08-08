@@ -26,7 +26,7 @@ a:hover{text-decoration:underline}
 .nav a.anchor{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .nav a.anchor:hover{color:var(--gold);text-decoration:none}
 /* hero */
-.hero{position:relative;min-height:62vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero{position:relative;min-height:74vh;display:flex;align-items:flex-end;overflow:hidden}
 .hero img,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0) 30%,rgba(10,10,10,.62) 58%,rgba(10,10,10,.94) 100%)}
 .hero-body{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:120px 24px 56px;width:100%}
@@ -113,13 +113,14 @@ footer .tag{margin-top:6px}
 </div></nav>
 
 <header class="hero" id="top">
-<video id="hero-video" autoplay muted playsinline poster="../videos/posters/trailer.jpg" aria-label="TORCH ATL trailer and reception arrival">
+<video id="hero-video" autoplay muted playsinline poster="../videos/posters/trailer.jpg" style="object-position:center 82%" aria-label="TORCH ATL trailer and reception arrival">
 <source src="../videos/trailer.mp4" type="video/mp4">
 </video>
 <script>
 (function(){
-var v=document.getElementById('hero-video'),clips=['../videos/trailer.mp4','../videos/reception.mp4'],i=0;
-v.addEventListener('ended',function(){i=(i+1)%clips.length;v.src=clips[i];v.play();});
+var v=document.getElementById('hero-video'),i=0,
+clips=[{src:'../videos/trailer.mp4',pos:'center 82%'},{src:'../videos/reception.mp4',pos:'center center'}];
+v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPosition=clips[i].pos;v.src=clips[i].src;v.play();});
 })();
 </script>
 <div class="hero-body">
