@@ -355,7 +355,7 @@ img { max-width: 100%; display: block; }
 
 /* Packages */
 .packages-section { background: var(--black); }
-.tiers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .tier {
     background: var(--panel); border: 1px solid var(--line);
     padding: 44px 34px; transition: var(--transition);
