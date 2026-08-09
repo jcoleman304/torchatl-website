@@ -51,7 +51,7 @@ p+p{margin-top:12px}
 .drive span{color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
 /* rooms */
 .room{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;margin-top:36px}
-.room img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.room img,.room video{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#000}
 .chain{border:1px solid var(--goldline);padding:14px 16px;margin:14px 0 18px;font-size:.86rem}
 .chain b{color:var(--gold);font-weight:500}
 .chain i{color:var(--muted);font-style:normal;padding:0 6px}
@@ -165,7 +165,9 @@ v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPositio
 <p class="sec-note">Full inventory on the <a href="../gear.html">gear rider</a>.</p>
 
 <div class="room">
-<img src="../images/g-04-162-studio-hero.jpg" alt="Recording Suite B — production desk and monitoring">
+<video class="room-vid" muted loop playsinline preload="none" poster="../videos/posters/black-studio.jpg" aria-label="Inside Recording Suite B">
+<source src="../videos/black-studio.mp4" type="video/mp4">
+</video>
 <div>
 <h3>Recording Suite B</h3>
 <div class="chain"><b>Neumann U87</b><i>→</i><b>Neve 1073 SPX</b><i>→</i><b>Tube-Tech CL1B</b><i>→</i><b>UAD Apollo X6</b></div>
@@ -178,7 +180,9 @@ v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPositio
 </div>
 
 <div class="room">
-<img src="../images/c-room-red.jpg" alt="Recording Suite C — lounge and production setup">
+<video class="room-vid" muted loop playsinline preload="none" poster="../videos/posters/red-studio.jpg" aria-label="Inside Recording Suite C">
+<source src="../videos/red-studio.mp4" type="video/mp4">
+</video>
 <div>
 <h3>Recording Suite C</h3>
 <div class="chain"><b>Neumann TLM 103</b><i>→</i><b>UA LA-610 MkII</b><i>→</i><b>UAD Apollo X8</b></div>
@@ -325,5 +329,13 @@ v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPositio
 <p class="tag">This dossier is shared by invitation. Specifications current as of August 2026; inventory subject to periodic audit.</p>
 </div></footer>
 
+<script>
+(function(){
+var vids=document.querySelectorAll('video.room-vid');
+if(!('IntersectionObserver' in window)){vids.forEach(function(v){v.play()});return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?e.target.play():e.target.pause();});},{threshold:.25});
+vids.forEach(function(v){io.observe(v)});
+})();
+</script>
 </body>
 </html>
