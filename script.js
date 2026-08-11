@@ -443,6 +443,35 @@ function handleMemberLogin(e) {
     err.classList.add('visible');
 }
 
+/* Newsletter signup */
+function handleNewsletterSignup(e) {
+    e.preventDefault();
+    const form = e.target;
+    const input = form.querySelector('input[name="email"]');
+    const btn = form.querySelector('button');
+    const note = document.getElementById('newsletter-note');
+    btn.disabled = true; btn.textContent = 'Subscribing…';
+    fetch('https://api.torchatl.com/api/subscribers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value, source: 'torchatl.com footer' })
+    }).then((r) => r.json().then((d) => ({ ok: r.ok, d }))).then(({ ok, d }) => {
+        if (ok) {
+            note.textContent = 'You’re on the list. Welcome to the fire.';
+            input.value = ''; btn.textContent = 'Subscribed';
+        } else {
+            note.textContent = (d && d.error) || 'Something went wrong — please try again.';
+            btn.disabled = false; btn.textContent = 'Subscribe';
+        }
+        note.classList.add('visible');
+    }).catch(() => {
+        note.textContent = 'Network error — please try again.';
+        note.classList.add('visible');
+        btn.disabled = false; btn.textContent = 'Subscribe';
+    });
+    return false;
+}
+
 /* A Room waitlist signup */
 function handleAroomSignup(e) {
     e.preventDefault();
