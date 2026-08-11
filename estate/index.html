@@ -83,8 +83,11 @@ ul.plain li::before{content:"—";position:absolute;left:0;color:var(--gold)}
 .suites .s-name{font-family:'Playfair Display',serif;font-size:1.02rem;display:block;margin-bottom:4px}
 .suites .s-facts{font-size:.8rem;color:var(--muted);line-height:1.5}
 @media(max-width:720px){.suites{grid-template-columns:1fr}}
-/* operator */
-.op{display:grid;grid-template-columns:1fr;gap:8px;max-width:720px}
+/* founder */
+.op{display:grid;grid-template-columns:220px 1fr;gap:34px;max-width:860px;align-items:start}
+.op-photo{width:100%;display:block;border:1px solid var(--goldline)}
+.op-caption{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:10px;text-align:center}
+@media(max-width:720px){.op{grid-template-columns:1fr}.op-photo{max-width:260px}}
 /* booking */
 .book-grid{display:flex;flex-wrap:wrap;gap:14px 44px;margin-top:20px;font-size:.95rem}
 .btn{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:12px 26px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-top:26px}
@@ -107,7 +110,7 @@ footer .tag{margin-top:6px}
 <a class="anchor" href="#rates">Rates &amp; Terms</a>
 <a class="anchor" href="#labels">Labels</a>
 <a class="anchor" href="#logistics">Logistics</a>
-<a class="anchor" href="#operator">Operator</a>
+<a class="anchor" href="#operator">Founder</a>
 <a class="anchor" href="#booking">Booking</a>
 <a class="anchor" href="TORCH_ATL_Spec_Sheet.pdf" download>PDF ↓</a>
 </div></nav>
@@ -304,10 +307,16 @@ v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPositio
 </div></section>
 
 <section id="operator"><div class="wrap">
-<h2>Operator</h2>
+<h2>Founder — Joi Coleman</h2>
 <div class="op">
-<p>Torch ATL is owned and operated by <strong>Joi Coleman</strong> — nine years at Atlantic Records, founder and CEO of Torch Music Corporation, and an active A&amp;R with current major-label projects. She reviews every booking request personally.</p>
+<figure style="margin:0">
+<img class="op-photo" src="joi-coleman.jpg" alt="Joi Coleman, Founder of Torch ATL" loading="lazy">
+<figcaption class="op-caption">Joi Coleman · Founder</figcaption>
+</figure>
+<div>
+<p>Joi Coleman is a music executive and a Grammy-nominated songwriter who spent nine years at Atlantic Records across A&amp;R and Studio Operations. She reviews every booking request personally.</p>
 <p style="margin-top:14px">The estate is trusted by Grammy Award-winning creatives — including <strong>Derrick Milano</strong>, 6× Grammy Award winner. Designed for A&amp;R admin, A&amp;R executives, label presidents, artist managers, product managers, publishers, producers, streamers, and content teams.</p>
+</div>
 </div>
 </div></section>
 
