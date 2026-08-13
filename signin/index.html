@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Torch Sign-In">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<title>Guest Sign-In — TORCH ATL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --gold: #D4AF37;
+    --cream: #F5F5F0;
+    --muted: #8a8a85;
+    --line: #2a2a28;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+    overscroll-behavior: none;
+  }
+  .wrap { width: 100%; max-width: 560px; padding: 40px 0 60px; }
+  header { text-align: center; margin-bottom: 36px; }
+  .wordmark {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 6vw, 40px);
+    letter-spacing: 6px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .flame { display: block; font-size: 26px; margin-bottom: 10px; }
+  .sub {
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .rule { width: 60px; height: 2px; background: var(--gold); margin: 22px auto 0; }
+
+  label { display: block; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; }
+  label .req { color: var(--gold); }
+  input[type=text], input[type=tel], input[type=email] {
+    width: 100%;
+    background: #141412;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 19px;
+    padding: 18px 16px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  input:focus { border-color: var(--gold); }
+  input::placeholder { color: #55554f; }
+
+  .pills { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (min-width: 480px) { .pills { grid-template-columns: 1fr 1fr 1fr; } }
+  .pill {
+    border: 1px solid var(--line);
+    background: #141412;
+    color: var(--cream);
+    border-radius: 10px;
+    padding: 16px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .pill.on { background: var(--gold); border-color: var(--gold); color: #0A0A0A; font-weight: 600; }
+
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+
+  .submit {
+    width: 100%;
+    margin-top: 36px;
+    background: var(--gold);
+    color: #0A0A0A;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 20px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .submit:disabled { opacity: .5; }
+  .err { display: none; margin-top: 16px; color: #E74C3C; font-size: 14px; text-align: center; }
+
+  .privacy { margin-top: 22px; text-align: center; font-size: 11px; color: #55554f; line-height: 1.5; }
+
+  /* Welcome overlay */
+  .welcome {
+    position: fixed; inset: 0;
+    background: var(--black);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    z-index: 10;
+  }
+  .welcome.show { display: flex; }
+  .welcome h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(30px, 7vw, 46px);
+    color: var(--gold);
+    margin: 18px 0 12px;
+  }
+  .welcome p { color: var(--muted); font-size: 16px; max-width: 400px; line-height: 1.6; }
+  .welcome .flame { font-size: 44px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="flame">🔥</span>
+      <div class="wordmark">TORCH ATL</div>
+      <div class="sub">Guest Sign-In</div>
+      <div class="rule"></div>
+    </header>
+
+    <form id="f" autocomplete="off" novalidate>
+      <label for="name">Full Name <span class="req">*</span></label>
+      <input type="text" id="name" placeholder="Your name" autocapitalize="words" required>
+
+      <label for="phone">Phone <span class="req">*</span></label>
+      <input type="tel" id="phone" placeholder="(404) 555-0100" inputmode="tel">
+
+      <label for="email">Email <span style="color:#55554f; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <input type="email" id="email" placeholder="you@email.com" inputmode="email" autocapitalize="off">
+
+      <label>Reason for Visit <span class="req">*</span></label>
+      <div class="pills" id="pills">
+        <button type="button" class="pill" data-v="session">Session</button>
+        <button type="button" class="pill" data-v="tour">Studio Tour</button>
+        <button type="button" class="pill" data-v="meeting">Meeting</button>
+        <button type="button" class="pill" data-v="guest">Guest of Member</button>
+        <button type="button" class="pill" data-v="delivery">Delivery</button>
+        <button type="button" class="pill" data-v="other">Other</button>
+      </div>
+
+      <label for="host">Who are you here to see? <span style="color:#55554f; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="host" placeholder="Name of member, engineer, or staff" autocapitalize="words">
+
+      <div class="hp"><input type="text" id="company" tabindex="-1" autocomplete="off"></div>
+
+      <button type="submit" class="submit" id="go">Sign In</button>
+      <div class="err" id="err"></div>
+      <p class="privacy">Your info is used for guest records and studio security only.</p>
+    </form>
+  </div>
+
+  <div class="welcome" id="welcome">
+    <span class="flame">🔥</span>
+    <h2>Welcome to Torch</h2>
+    <p>You're signed in. Make yourself at home —<br>where comfort ignites creativity.</p>
+  </div>
+
+<script>
+(function () {
+  var API = 'https://api.torchatl.com/api/signin';
+  var source = /[?&]src=qr/.test(location.search) ? 'phone' : 'ipad';
+  var reason = null;
+
+  var pills = document.getElementById('pills');
+  pills.addEventListener('click', function (e) {
+    var btn = e.target.closest('.pill');
+    if (!btn) return;
+    reason = btn.dataset.v;
+    pills.querySelectorAll('.pill').forEach(function (p) { p.classList.toggle('on', p === btn); });
+  });
+
+  var f = document.getElementById('f');
+  var go = document.getElementById('go');
+  var err = document.getElementById('err');
+
+  function showErr(msg) { err.textContent = msg; err.style.display = 'block'; }
+
+  // Retry queue: if the network drops mid-session, sign-ins are kept locally
+  // and flushed the next time the page loads or a submission succeeds.
+  var QKEY = 'torch_signin_queue';
+  function flushQueue() {
+    var q;
+    try { q = JSON.parse(localStorage.getItem(QKEY) || '[]'); } catch (e) { q = []; }
+    if (!q.length) return;
+    var entry = q[0];
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) })
+      .then(function (r) {
+        if (r.ok || r.status === 400) {
+          q.shift();
+          localStorage.setItem(QKEY, JSON.stringify(q));
+          if (q.length) flushQueue();
+        }
+      }).catch(function () {});
+  }
+  flushQueue();
+
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.style.display = 'none';
+
+    var name = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var host = document.getElementById('host').value.trim();
+
+    if (document.getElementById('company').value) return; // honeypot
+    if (!name) return showErr('Please enter your name.');
+    if (!reason) return showErr('Please choose a reason for your visit.');
+    if (!phone && !email) return showErr('Please enter a phone number or email.');
+
+    var entry = { name: name, phone: phone || null, email: email || null, reason: reason, host: host || null, source: source };
+
+    go.disabled = true;
+    go.textContent = 'Signing In…';
+
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) })
+      .then(function (r) {
+        if (!r.ok) return r.json().then(function (j) { throw new Error(j.error || 'Sign-in failed'); });
+        done();
+        flushQueue();
+      })
+      .catch(function (ex) {
+        if (ex instanceof TypeError) {
+          // Network failure — queue it and still welcome the guest
+          var q;
+          try { q = JSON.parse(localStorage.getItem(QKEY) || '[]'); } catch (e2) { q = []; }
+          q.push(entry);
+          localStorage.setItem(QKEY, JSON.stringify(q));
+          done();
+        } else {
+          showErr(ex.message);
+          go.disabled = false;
+          go.textContent = 'Sign In';
+        }
+      });
+  });
+
+  function done() {
+    document.getElementById('welcome').classList.add('show');
+    setTimeout(function () {
+      f.reset();
+      reason = null;
+      pills.querySelectorAll('.pill').forEach(function (p) { p.classList.remove('on'); });
+      go.disabled = false;
+      go.textContent = 'Sign In';
+      document.getElementById('welcome').classList.remove('show');
+      window.scrollTo(0, 0);
+    }, source === 'ipad' ? 5000 : 60000);
+  }
+})();
+</script>
+</body>
+</html>
