@@ -264,7 +264,7 @@ img { max-width: 100%; display: block; }
 .hero-content .btn { opacity: 0; animation: fadeUp 1s ease 1.2s forwards; }
 .hero-ctas { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 /* On desktop the membership CTA lives in the navbar; the hero copy is mobile-only */
-.hero-membership { display: none; }
+.hero-membership { display: none; border-color: var(--gold); }
 .hero-scroll {
     position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
     z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
