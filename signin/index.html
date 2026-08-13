@@ -53,14 +53,7 @@
   }
   .wrap { width: 100%; max-width: 560px; padding: 40px 0 60px; }
   header { text-align: center; margin-bottom: 36px; }
-  .wordmark {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(28px, 6vw, 40px);
-    letter-spacing: 6px;
-    color: var(--gold);
-    font-weight: 600;
-  }
-  .flame { display: block; font-size: 26px; margin-bottom: 10px; }
+  header .logo { width: min(64vw, 300px); height: auto; display: block; margin: 0 auto; }
   .sub {
     margin-top: 10px;
     font-size: 13px;
@@ -139,15 +132,7 @@
   }
   .landing.off { display: none; }
   .landing:not(.off) ~ .wrap { visibility: hidden; }
-  .landing .flame { font-size: 54px; margin-bottom: 18px; }
-  .landing h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(52px, 12vw, 110px);
-    letter-spacing: 12px;
-    color: var(--gold);
-    font-weight: 600;
-    line-height: 1.1;
-  }
+  .landing .logo { width: min(78vw, 640px); height: auto; }
   .landing .tagline {
     margin-top: 18px;
     font-size: clamp(13px, 2.4vw, 17px);
@@ -191,7 +176,6 @@
     margin: 18px 0 12px;
   }
   .welcome p { color: var(--muted); font-size: 16px; max-width: 400px; line-height: 1.6; }
-  .welcome .flame { font-size: 44px; }
 </style>
 </head>
 <body>
@@ -199,16 +183,14 @@
   <div class="bgoverlay"></div>
 
   <div class="landing" id="landing">
-    <span class="flame">🔥</span>
-    <h1>TORCH ATL</h1>
+    <img class="logo" src="logo.png" alt="TORCH ATL">
     <div class="tagline">Where Comfort Ignites Creativity</div>
     <button type="button" class="start" id="start">Sign In</button>
   </div>
 
   <div class="wrap">
     <header>
-      <span class="flame">🔥</span>
-      <div class="wordmark">TORCH ATL</div>
+      <img class="logo" src="logo.png" alt="TORCH ATL">
       <div class="sub">Guest Sign-In</div>
       <div class="rule"></div>
     </header>
@@ -247,7 +229,7 @@
   </div>
 
   <div class="welcome" id="welcome">
-    <span class="flame">🔥</span>
+    <img class="logo" src="logo.png" alt="TORCH ATL" style="width: min(50vw, 260px);">
     <h2>Welcome to Torch</h2>
     <p>You're signed in. Make yourself at home —<br>where comfort ignites creativity.</p>
   </div>
