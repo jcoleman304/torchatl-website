@@ -49,8 +49,9 @@
 
   .screen { display: none; width: 100%; max-width: 640px; padding: 46px 0 60px; }
   .screen.on { display: block; }
+  .screen.on.center { display: flex; }
 
-  .center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 88vh; }
+  .center { flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 88vh; }
   .logo-lg { width: min(78vw, 560px); height: auto; }
   .logo-sm { width: min(56vw, 240px); height: auto; display: block; margin: 0 auto; }
   .tagline { margin-top: 18px; font-size: clamp(13px, 2.4vw, 17px); letter-spacing: 5px; text-transform: uppercase; color: var(--muted); }
