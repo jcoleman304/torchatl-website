@@ -51,6 +51,9 @@
     z-index: -1;
     pointer-events: none;
   }
+  /* Video plays behind the landing screen only; the form sits on solid black */
+  body.form-open .bgvid { display: none; }
+  body.form-open .bgoverlay { background: var(--black); }
   .wrap { width: 100%; max-width: 560px; padding: 40px 0 60px; }
   header { text-align: center; margin-bottom: 36px; }
   header .logo { width: min(64vw, 300px); height: auto; display: block; margin: 0 auto; }
@@ -243,9 +246,13 @@
   // Landing screen: iPad kiosk opens on the TORCH ATL welcome view;
   // QR/phone visitors already chose to sign in, so they go straight to the form.
   var landing = document.getElementById('landing');
-  if (source === 'phone') landing.classList.add('off');
+  if (source === 'phone') {
+    landing.classList.add('off');
+    document.body.classList.add('form-open');
+  }
   document.getElementById('start').addEventListener('click', function () {
     landing.classList.add('off');
+    document.body.classList.add('form-open');
     window.scrollTo(0, 0);
   });
 
@@ -332,7 +339,10 @@
       go.disabled = false;
       go.textContent = 'Sign In';
       document.getElementById('welcome').classList.remove('show');
-      if (source === 'ipad') landing.classList.remove('off');
+      if (source === 'ipad') {
+        landing.classList.remove('off');
+        document.body.classList.remove('form-open');
+      }
       window.scrollTo(0, 0);
     }, source === 'ipad' ? 5000 : 60000);
   }
