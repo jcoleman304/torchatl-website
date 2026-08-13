@@ -262,6 +262,9 @@ img { max-width: 100%; display: block; }
     opacity: 0; animation: fadeUp 1s ease 0.95s forwards;
 }
 .hero-content .btn { opacity: 0; animation: fadeUp 1s ease 1.2s forwards; }
+.hero-ctas { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+/* On desktop the membership CTA lives in the navbar; the hero copy is mobile-only */
+.hero-membership { display: none; }
 .hero-scroll {
     position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
     z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -710,7 +713,8 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 768px) {
     .container { padding: 0 22px; }
-    .nav-book { padding: 9px 18px; font-size: 0.62rem; }
+    .nav-book { display: none; }
+    .hero-membership { display: inline-block; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
     .tiers { grid-template-columns: 1fr; }
     .details-grid { grid-template-columns: 1fr; gap: 32px; }
