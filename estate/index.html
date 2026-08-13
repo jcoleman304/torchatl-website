@@ -176,7 +176,7 @@ v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPositio
 <section id="walkthrough"><div class="wrap">
 <h2>The Walkthrough</h2>
 <p class="sec-note">Explore the full estate of Torch ATL.</p>
-<video controls preload="metadata" playsinline poster="walkthrough-poster.jpg" style="width:100%;display:block;border:1px solid var(--line);background:#000">
+<video class="room-vid" controls muted preload="metadata" playsinline poster="walkthrough-poster.jpg" style="width:100%;display:block;border:1px solid var(--line);background:#000">
 <source src="walkthrough.mp4" type="video/mp4">
 </video>
 </div></section>
@@ -386,8 +386,16 @@ d.addEventListener('mouseleave',function(){d.open=false;});
 (function(){
 var vids=document.querySelectorAll('video.room-vid');
 if(!('IntersectionObserver' in window)){vids.forEach(function(v){v.play()});return;}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?e.target.play():e.target.pause();});},{threshold:.25});
-vids.forEach(function(v){io.observe(v)});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+var v=e.target;
+if(e.isIntersecting){if(!v.dataset.userPaused)v.play();}
+else{v.dataset.auto='1';v.pause();}
+});},{threshold:.25});
+vids.forEach(function(v){
+io.observe(v);
+v.addEventListener('pause',function(){if(v.dataset.auto==='1'){delete v.dataset.auto;}else{v.dataset.userPaused='1';}});
+v.addEventListener('play',function(){delete v.dataset.userPaused;});
+});
 })();
 </script>
 </body>
