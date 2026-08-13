@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign-In QR Card — TORCH ATL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a18;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 16px;
+  }
+  .card {
+    background: #0A0A0A;
+    color: #F5F5F0;
+    width: 100%;
+    max-width: 480px;
+    border: 2px solid #D4AF37;
+    border-radius: 18px;
+    padding: 52px 40px;
+    text-align: center;
+  }
+  .flame { font-size: 30px; display: block; margin-bottom: 12px; }
+  .wordmark {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 34px;
+    letter-spacing: 6px;
+    color: #D4AF37;
+    font-weight: 600;
+  }
+  .sub { margin-top: 8px; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #8a8a85; }
+  .qr-box {
+    background: #F5F5F0;
+    border-radius: 14px;
+    padding: 22px;
+    margin: 34px auto 30px;
+    width: fit-content;
+  }
+  .qr-box img { display: block; width: 260px; height: 260px; }
+  .instruction {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    color: #F5F5F0;
+    line-height: 1.4;
+  }
+  .instruction em { color: #D4AF37; font-style: normal; }
+  .url { margin-top: 16px; font-size: 13px; letter-spacing: 1px; color: #8a8a85; }
+  .print-hint { margin-top: 24px; color: #666; font-size: 13px; }
+  .print-hint button {
+    background: #D4AF37; color: #0A0A0A; border: none; border-radius: 8px;
+    padding: 10px 22px; font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: 14px; cursor: pointer;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card { border-radius: 0; border: none; max-width: none; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .print-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="flame">🔥</span>
+    <div class="wordmark">TORCH ATL</div>
+    <div class="sub">Guest Sign-In</div>
+    <div class="qr-box"><img src="qr.png" alt="QR code to sign in"></div>
+    <div class="instruction">Scan to sign in<br><em>on your phone</em></div>
+    <div class="url">torchatl.com/signin</div>
+  </div>
+  <div class="print-hint"><button onclick="window.print()">Print This Card</button></div>
+</body>
+</html>
