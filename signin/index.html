@@ -126,6 +126,51 @@
 
   .privacy { margin-top: 22px; text-align: center; font-size: 11px; color: #55554f; line-height: 1.5; }
 
+  /* Landing (attract) screen */
+  .landing {
+    position: fixed; inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    z-index: 5;
+  }
+  .landing.off { display: none; }
+  .landing:not(.off) ~ .wrap { visibility: hidden; }
+  .landing .flame { font-size: 54px; margin-bottom: 18px; }
+  .landing h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(52px, 12vw, 110px);
+    letter-spacing: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .landing .tagline {
+    margin-top: 18px;
+    font-size: clamp(13px, 2.4vw, 17px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .landing .start {
+    margin-top: 54px;
+    background: var(--gold);
+    color: #0A0A0A;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 24px 72px;
+    cursor: pointer;
+  }
+  .landing .start:active { opacity: .85; }
+
   /* Welcome overlay */
   .welcome {
     position: fixed; inset: 0;
@@ -152,6 +197,14 @@
 <body>
   <video class="bgvid" autoplay muted loop playsinline preload="auto" src="/videos/torch-atl-trailer.mp4"></video>
   <div class="bgoverlay"></div>
+
+  <div class="landing" id="landing">
+    <span class="flame">🔥</span>
+    <h1>TORCH ATL</h1>
+    <div class="tagline">Where Comfort Ignites Creativity</div>
+    <button type="button" class="start" id="start">Sign In</button>
+  </div>
+
   <div class="wrap">
     <header>
       <span class="flame">🔥</span>
@@ -204,6 +257,15 @@
   var API = 'https://api.torchatl.com/api/signin';
   var source = /[?&]src=qr/.test(location.search) ? 'phone' : 'ipad';
   var reason = null;
+
+  // Landing screen: iPad kiosk opens on the TORCH ATL welcome view;
+  // QR/phone visitors already chose to sign in, so they go straight to the form.
+  var landing = document.getElementById('landing');
+  if (source === 'phone') landing.classList.add('off');
+  document.getElementById('start').addEventListener('click', function () {
+    landing.classList.add('off');
+    window.scrollTo(0, 0);
+  });
 
   var pills = document.getElementById('pills');
   pills.addEventListener('click', function (e) {
@@ -288,6 +350,7 @@
       go.disabled = false;
       go.textContent = 'Sign In';
       document.getElementById('welcome').classList.remove('show');
+      if (source === 'ipad') landing.classList.remove('off');
       window.scrollTo(0, 0);
     }, source === 'ipad' ? 5000 : 60000);
   }
