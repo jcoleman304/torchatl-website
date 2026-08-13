@@ -88,6 +88,12 @@ ul.plain li::before{content:"—";position:absolute;left:0;color:var(--gold)}
 .op-photo{width:100%;display:block;border:1px solid var(--goldline)}
 .op-caption{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:10px;text-align:center}
 @media(max-width:720px){.op{grid-template-columns:1fr}.op-photo{max-width:260px}}
+/* motion grid */
+.motion{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+.motion .mi{position:relative;aspect-ratio:16/9;overflow:hidden}
+.motion video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.motion .mc{position:absolute;left:16px;bottom:12px;z-index:2;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+@media(max-width:720px){.motion{grid-template-columns:1fr;gap:12px}}
 /* faq */
 .faq{max-width:760px}
 .faq .item{border-top:1px solid var(--line);padding:18px 0}
@@ -237,6 +243,12 @@ v.addEventListener('ended',function(){i=(i+1)%clips.length;v.style.objectPositio
 <dt>Outdoor</dt><dd>Deck with lounge and dining seating · grill · designated smoking area</dd>
 <dt>Staffing</dt><dd>Studio sessions run with a Torch House engineer or one of personal hire (during stays, engineers are an add-on), and every stay carries a dedicated coordinator — the point of contact for the duration of the stay. Rooms are sanitized, reset, and gear-verified before each session; linens are changed between every booking. Overtime and changes route through the estate manager.</dd>
 </dl>
+<div class="motion">
+<div class="mi"><video class="room-vid" muted loop playsinline preload="none" poster="../videos/posters/room1.jpg" aria-label="Guest suite walkthrough"><source src="../videos/room1.mp4" type="video/mp4"></video><span class="mc">Guest Suite</span></div>
+<div class="mi"><video class="room-vid" muted loop playsinline preload="none" poster="../videos/posters/kitchen.jpg" aria-label="The chef's kitchen"><source src="../videos/kitchen.mp4" type="video/mp4"></video><span class="mc">Chef's Kitchen</span></div>
+<div class="mi"><video class="room-vid" muted loop playsinline preload="none" poster="../videos/posters/backdrop.jpg" aria-label="The photoshoot wall"><source src="../videos/backdrop.mp4" type="video/mp4"></video><span class="mc">Photoshoot Wall</span></div>
+<div class="mi"><video class="room-vid" muted loop playsinline preload="none" poster="../videos/posters/porch.jpg" aria-label="The outdoor porch and deck"><source src="../videos/porch.mp4" type="video/mp4"></video><span class="mc">Outdoor Deck</span></div>
+</div>
 </div></section>
 
 <section id="modes"><div class="wrap">
