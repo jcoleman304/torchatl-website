@@ -111,6 +111,51 @@
   .ack span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
   .ack.optin { border-color: #3a3220; }
   .ack.hidden { display: none; }
+  .ack .view-doc {
+    display: inline-block; margin-top: 8px;
+    background: none; border: 1px solid var(--gold); border-radius: 8px;
+    color: var(--gold); font-family: 'Inter', sans-serif; font-size: 12px;
+    letter-spacing: 1px; text-transform: uppercase; padding: 7px 14px; cursor: pointer;
+  }
+
+  /* Document preview modal (house rules, NDA summary) */
+  .doc-modal {
+    position: fixed; inset: 0; z-index: 60; display: none;
+    background: rgba(10,10,10,0.94);
+    padding: 20px; align-items: center; justify-content: center;
+  }
+  .doc-modal.show { display: flex; }
+  .doc-card {
+    background: #121210; border: 1px solid var(--gold); border-radius: 14px;
+    width: 100%; max-width: 640px; max-height: 86dvh; max-height: 86vh;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .doc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px; border-bottom: 1px solid var(--line);
+  }
+  .doc-head h4 {
+    font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: var(--gold);
+    font-weight: 600;
+  }
+  .doc-body {
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 6px 20px 20px; font-size: 14px; line-height: 1.65; color: var(--cream);
+  }
+  .doc-body h5 {
+    color: var(--gold); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    margin: 20px 0 6px;
+  }
+  .doc-body p, .doc-body li { color: #c9c9c2; }
+  .doc-body ul { padding-left: 20px; margin: 4px 0; }
+  .doc-body .doc-note { font-size: 12px; color: var(--muted); margin-top: 18px; }
+  .doc-close {
+    background: var(--gold); color: #0A0A0A; border: none; border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; padding: 11px 22px; cursor: pointer;
+  }
+  .doc-foot { padding: 14px 20px; border-top: 1px solid var(--line); text-align: center; }
+  .doc-foot .doc-close { width: 100%; padding: 15px; font-size: 15px; }
 
   .sig-box { background: var(--cream); border-radius: 10px; margin-top: 6px; position: relative; }
   #sig { display: block; width: 100%; height: 170px; border-radius: 10px; touch-action: none; }
@@ -307,6 +352,20 @@
     <p class="welcome-p" id="welcome-msg">You're checked in. Make yourself at home —<br>where comfort ignites creativity.</p>
   </div>
 
+  <!-- Document preview modal -->
+  <div class="doc-modal" id="doc-modal">
+    <div class="doc-card">
+      <div class="doc-head">
+        <h4 id="doc-title">Document</h4>
+        <button type="button" class="doc-close" id="doc-close-top">Close</button>
+      </div>
+      <div class="doc-body" id="doc-body"></div>
+      <div class="doc-foot">
+        <button type="button" class="doc-close" id="doc-close-bottom">Done — Back to Check-In</button>
+      </div>
+    </div>
+  </div>
+
   <datalist id="bookings">
     <option value="Camp 001"></option>
     <option value="Estate Buyout"></option>
@@ -337,6 +396,41 @@
   // Shown and required only for an overnight stay / lock out.
   var OVERNIGHT_ACK = ['overnight', 'Overnight stay / lock out', 'I am staying overnight as an authorized lock-out or overnight guest. I will remain in authorized areas only, observe quiet hours, admit no additional visitors without Torch management approval, and understand overnight access may be ended at any time.'];
 
+  // Previewable documents — opened from the ⓘ View button on an acknowledgment card.
+  var DOCS = {
+    house_rules: {
+      title: 'Torch ATL — House Rules',
+      html:
+        '<p><em>Welcome to Torch ATL — Record. Retreat. Recharge. These rules protect the vibe, the property, and everyone’s experience.</em></p>' +
+        '<h5>1 · Time Rules (Strict)</h5><ul><li>Your booking runs from your confirmed start time to your confirmed end time.</li><li>Running late? Contact management <b>before</b> your end time. Overtime is only valid once approved by Torch and confirmed by the primary client who booked.</li></ul>' +
+        '<h5>2 · Guest Limits (Includes Everyone)</h5><ul><li>A Room — included: 8 people / hard cap: 10 total.</li><li>B Room — included: 5 people / hard cap: 7 total.</li><li>C Room — included: 5 people / hard cap: 7 total.</li><li>No unapproved guests. Everyone must be with the primary client contact.</li><li>Over the included limit, additional guest fees may apply or entry may be denied.</li></ul>' +
+        '<h5>3 · Smoking / Vaping (Studio-Only)</h5><ul><li>No smoking or vaping in common areas (hallways, lounges, kitchen) or guest suites, including suite bathrooms.</li><li>Permitted only inside the booked studio room with the door closed, or outdoors in the designated area (Torch Deck).</li><li>Violations trigger a deep-cleaning / odor remediation fee starting at $300.</li></ul>' +
+        '<h5>4 · Respect the Space + Gear</h5><ul><li>Don’t move furniture or gear without staff approval.</li><li>Keep food and drinks away from equipment — no drinks on racks or the console.</li><li>Damage, missing items, or excessive mess is billed to the booking client.</li></ul>' +
+        '<h5>5 · Cleanliness</h5><ul><li>Trash goes in bins; keep areas session-ready.</li><li>Spills — notify staff immediately.</li></ul>' +
+        '<h5>6 · Restricted Areas</h5><ul><li>No entering locked doors, staff-only areas, storage, or private suites not included in your booking.</li></ul>' +
+        '<h5>7 · Behavior Expectations</h5><ul><li>No fighting, threats, harassment, reckless behavior, or chaos.</li><li>Torch may end a session for safety, violations, or disruption — no refund in those cases.</li></ul>' +
+        '<h5>8 · Security Cameras (Common Areas Only)</h5><ul><li>Cameras monitor exterior, entry points, hallways, and common lounges for safety.</li><li>No Torch cameras in bathrooms, guest suites, or inside studio rooms.</li></ul>' +
+        '<h5>9 · Parking + Noise</h5><ul><li>Park only in approved areas and keep access clear.</li><li>Respect the neighbors — keep outdoor noise down, especially late night.</li></ul>' +
+        '<h5>10 · Personal Items</h5><ul><li>Torch is not responsible for lost or stolen items. Keep valuables with you.</li></ul>'
+    },
+    nda: {
+      title: 'Confidentiality — What You’re Agreeing To',
+      html:
+        '<p>Torch ATL is a private creative space. By checking the Confidentiality / NDA acknowledgment, you agree to keep private everything you see and hear here:</p>' +
+        '<h5>Keep Confidential</h5><ul>' +
+        '<li><b>The music</b> — unreleased songs, lyrics, beats, recordings, and song or album concepts, until officially released.</li>' +
+        '<li><b>The people</b> — who is recording, visiting, or working at Torch. Don’t reveal, post, or discuss anyone’s presence here.</li>' +
+        '<li><b>The business</b> — deals, rates, schedules, and any business conversations you overhear.</li>' +
+        '<li><b>The creative process</b> — sessions, ideas, strategies, and anything in development.</li></ul>' +
+        '<h5>No Posting or Capture</h5><ul>' +
+        '<li>No photos, video, audio, live streams, or stories from inside studios or control rooms without written approval from the host and Torch management.</li>' +
+        '<li>Nothing captured here goes on social media without approval.</li></ul>' +
+        '<h5>How Long</h5><ul><li>Unreleased music stays confidential until it’s officially released. Everything else stays confidential after your visit ends.</li></ul>' +
+        '<h5>If Something Leaks</h5><ul><li>Leaks are investigated, and whoever is responsible is liable for the resulting damages.</li></ul>' +
+        '<p class="doc-note">This is a plain-language summary of the confidentiality terms you’re acknowledging. A full written NDA is available from Torch management on request.</p>'
+    }
+  };
+
   var acksEl = document.getElementById('acks');
   ACKS.concat([OVERNIGHT_ACK]).forEach(function (a) {
     var l = document.createElement('label');
@@ -344,8 +438,32 @@
     l.id = 'ack-row-' + a[0];
     l.style.margin = '10px 0 0';
     l.innerHTML = '<input type="checkbox" data-ack="' + a[0] + '"><div><b>' + a[1] +
-      ' <span style="color:var(--gold)">*</span></b><span>' + a[2] + '</span></div>';
+      ' <span style="color:var(--gold)">*</span></b><span>' + a[2] + '</span>' +
+      (DOCS[a[0]] ? '<br><button type="button" class="view-doc" data-doc="' + a[0] + '">ⓘ&nbsp; View</button>' : '') +
+      '</div>';
     acksEl.appendChild(l);
+  });
+
+  // --- document preview modal ---
+  var docModal = document.getElementById('doc-modal');
+  function openDoc(key) {
+    var d = DOCS[key]; if (!d) return;
+    document.getElementById('doc-title').textContent = d.title;
+    document.getElementById('doc-body').innerHTML = d.html;
+    docModal.classList.add('show');
+    document.getElementById('doc-body').scrollTop = 0;
+  }
+  function closeDoc() { docModal.classList.remove('show'); }
+  document.getElementById('doc-close-top').addEventListener('click', closeDoc);
+  document.getElementById('doc-close-bottom').addEventListener('click', closeDoc);
+  docModal.addEventListener('click', function (e) { if (e.target === docModal) closeDoc(); });
+  // The View buttons live inside the checkbox <label>: stop the click from toggling the box.
+  acksEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.view-doc');
+    if (!b) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openDoc(b.dataset.doc);
   });
 
   // --- screen switching ---
