@@ -1,0 +1,43 @@
+# torchatl.com — crawler policy
+# Search and answer engines are welcome. Private pages are excluded below.
+
+User-agent: *
+Allow: /
+Disallow: /estate/
+Disallow: /walkthrough/
+Disallow: /signin/
+Disallow: /portal/
+Disallow: /members/
+Disallow: /membership/invite/
+Disallow: /engineer.html
+Disallow: /engineer-docs/
+Disallow: /intern.html
+Disallow: /interns.html
+Disallow: /intern-portal.html
+Disallow: /thanks.html
+
+# AI answer engines (explicitly allowed)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://torchatl.com/sitemap.xml
